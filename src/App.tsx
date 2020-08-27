@@ -1,8 +1,8 @@
 import React from "react";
 
 import Form from "./Form";
-import SvgRenderer from "./renderers/SvgRenderer";
-import CanvasRenderer from "./renderers/CanvasRenderer";
+import SvgRenderer from "src/renderers/SvgRenderer";
+import CanvasRenderer from "src/renderers/CanvasRenderer";
 import { Box, Container, makeStyles, Paper, Card } from "@material-ui/core";
 import { styled } from "@material-ui/styles";
 

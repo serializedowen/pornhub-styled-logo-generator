@@ -1,9 +1,9 @@
 import React from "react";
-import useConfig from "../hooks/useConfig";
-import drawRoundedRect from "../utils/drawRoundedRect";
-import download from "../utils/download";
+import useConfig from "src/hooks/useConfig";
+import drawRoundedRect from "src/utils/drawRoundedRect";
+import download from "src/utils/download";
 import { Button } from "@material-ui/core";
-import { dataURItoBlob } from "../utils/download";
+import { dataURItoBlob } from "src/utils/download";
 
 let currentAnimation: number;
 

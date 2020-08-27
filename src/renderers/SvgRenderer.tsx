@@ -1,6 +1,6 @@
 import React, { useRef, useCallback } from "react";
-import useConfig from "../hooks/useConfig";
-import download from "../utils/download";
+import useConfig from "src/hooks/useConfig";
+import download from "src/utils/download";
 import { Button } from "@material-ui/core";
 
 export default function SvgRenderer({ content, splitIndex }: IRendererProps) {
