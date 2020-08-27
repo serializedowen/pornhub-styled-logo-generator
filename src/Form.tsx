@@ -4,11 +4,22 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import NativeFormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-import { TextField, Paper, makeStyles, IconButton } from "@material-ui/core";
+import {
+  TextField,
+  Paper,
+  makeStyles,
+  IconButton,
+  Input,
+  Button,
+} from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
 import RendererTypes from "src/renderers/rendererTypes";
 import GetAppIcon from "@material-ui/icons/GetApp";
-
+import ArrowBackIos from "@material-ui/icons/ArrowBackIos";
+import ArrowForwardIos from "@material-ui/icons/ArrowForwardIos";
+import Tooltip from "@material-ui/core/Tooltip";
+import Fade from "@material-ui/core/Fade";
+import Zoom from "@material-ui/core/Zoom";
 type FormProps = {
   content: string;
   setContent: React.Dispatch<React.SetStateAction<string>>;
@@ -24,6 +35,7 @@ const useStyles = makeStyles({
     margin: "20px",
     padding: "20px",
   },
+  numberInput: {},
 });
 
 const FormControl = styled(NativeFormControl)({
@@ -66,6 +78,43 @@ export default function Form({
           label="请输入文字"
         />
       </FormControl>
+      <FormControl>
+        <FormLabel component="legend">分隔</FormLabel>
+        <Input
+          className={classes.numberInput}
+          value={splitIndex}
+          type="number"
+          inputMode="numeric"
+          inputProps={{
+            min: 0,
+            max: content.length,
+          }}
+          onInput={(event) =>
+            setsplitIndex(Number((event.target as HTMLInputElement).value))
+          }
+          startAdornment={
+            <IconButton
+              disabled={splitIndex <= 0}
+              onClick={() => {
+                if (splitIndex - 1 >= 0) setsplitIndex((ind) => ind - 1);
+              }}
+            >
+              <ArrowBackIos></ArrowBackIos>
+            </IconButton>
+          }
+          endAdornment={
+            <IconButton
+              disabled={splitIndex >= content.length}
+              onClick={() => {
+                if (splitIndex + 1 <= content.length)
+                  setsplitIndex((ind) => ind + 1);
+              }}
+            >
+              <ArrowForwardIos></ArrowForwardIos>
+            </IconButton>
+          }
+        />
+      </FormControl>
 
       <FormControl>
         <FormLabel component="legend">类型</FormLabel>
@@ -90,16 +139,18 @@ export default function Form({
         </span>
       </FormControl>
       <FormControl>
-        <span>
-          <IconButton
-            disabled={content.length === 0 || !generateType}
-            color="secondary"
-            component="span"
-            onClick={exportMethod}
-          >
-            <GetAppIcon></GetAppIcon>
-          </IconButton>
-        </span>
+        <Tooltip title="下载" TransitionComponent={Fade} placement="top">
+          <span>
+            <IconButton
+              disabled={content.length === 0 || !generateType}
+              color="secondary"
+              component="span"
+              onClick={exportMethod}
+            >
+              <GetAppIcon></GetAppIcon>
+            </IconButton>
+          </span>
+        </Tooltip>
       </FormControl>
     </Paper>
   );
