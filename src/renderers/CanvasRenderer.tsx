@@ -76,9 +76,6 @@ export default function CanvasRenderer({
   return (
     <div>
       <canvas ref={canvasRef}></canvas>
-      <div>
-        <Button onClick={exportFunction}>Export</Button>
-      </div>
     </div>
   );
 }
