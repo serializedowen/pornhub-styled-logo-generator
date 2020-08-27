@@ -19,16 +19,18 @@ export default ({
   useEffect(() => {
     const newConfig = Object.assign({}, defaultConfig);
 
-    const containerWidth =
+    newConfig.width =
       Math.max(
         content.substring(0, splitIndex).gblen,
         content.substring(splitIndex).gblen
-      ) * 45;
-    newConfig.width = containerWidth * 2 + 40;
+      ) *
+        45 *
+        2 +
+      40;
     newConfig.height = Math.floor(newConfig.width * 0.6);
 
-    newConfig.leftWidth = containerWidth;
-    newConfig.rightWidth = containerWidth;
+    newConfig.leftWidth = content.substring(0, splitIndex).gblen * 45;
+    newConfig.rightWidth = content.substring(splitIndex).gblen * 45;
 
     setstate(newConfig);
     return () => {};
