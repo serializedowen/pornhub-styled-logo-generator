@@ -35,7 +35,16 @@ const useStyles = makeStyles({
     margin: "20px",
     padding: "20px",
   },
-  numberInput: {},
+  numberInput: {
+    maxWidth: "150px",
+    "& .MuiInput-input::-webkit-inner-spin-button": {
+      WebkitAppearance: "none",
+      margin: 0,
+    },
+    "& .MuiInput-input[type=number]": {
+      MozAppearance: "textfield",
+    },
+  },
 });
 
 const FormControl = styled(NativeFormControl)({
@@ -86,6 +95,7 @@ export default function Form({
           type="number"
           inputMode="numeric"
           inputProps={{
+            style: {},
             min: 0,
             max: content.length,
           }}
