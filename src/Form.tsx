@@ -89,41 +89,43 @@ export default function Form({
       </FormControl>
       <FormControl>
         <FormLabel component="legend">分隔</FormLabel>
-        <Input
-          className={classes.numberInput}
-          value={splitIndex}
-          type="number"
-          inputMode="numeric"
-          inputProps={{
-            style: {},
-            min: 0,
-            max: content.length,
-          }}
-          onInput={(event) =>
-            setsplitIndex(Number((event.target as HTMLInputElement).value))
-          }
-          startAdornment={
-            <IconButton
-              disabled={splitIndex <= 0}
-              onClick={() => {
-                if (splitIndex - 1 >= 0) setsplitIndex((ind) => ind - 1);
-              }}
-            >
-              <ArrowBackIos></ArrowBackIos>
-            </IconButton>
-          }
-          endAdornment={
-            <IconButton
-              disabled={splitIndex >= content.length}
-              onClick={() => {
-                if (splitIndex + 1 <= content.length)
-                  setsplitIndex((ind) => ind + 1);
-              }}
-            >
-              <ArrowForwardIos></ArrowForwardIos>
-            </IconButton>
-          }
-        />
+        <Tooltip title="文字分隔点" TransitionComponent={Zoom}>
+          <Input
+            className={classes.numberInput}
+            value={splitIndex}
+            type="number"
+            inputMode="numeric"
+            inputProps={{
+              style: {},
+              min: 0,
+              max: content.length,
+            }}
+            onInput={(event) =>
+              setsplitIndex(Number((event.target as HTMLInputElement).value))
+            }
+            startAdornment={
+              <IconButton
+                disabled={splitIndex <= 0}
+                onClick={() => {
+                  if (splitIndex - 1 >= 0) setsplitIndex((ind) => ind - 1);
+                }}
+              >
+                <ArrowBackIos></ArrowBackIos>
+              </IconButton>
+            }
+            endAdornment={
+              <IconButton
+                disabled={splitIndex >= content.length}
+                onClick={() => {
+                  if (splitIndex + 1 <= content.length)
+                    setsplitIndex((ind) => ind + 1);
+                }}
+              >
+                <ArrowForwardIos></ArrowForwardIos>
+              </IconButton>
+            }
+          />
+        </Tooltip>
       </FormControl>
 
       <FormControl>
