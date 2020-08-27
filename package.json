@@ -1,7 +1,6 @@
 {
   "name": "ph-logo-generator",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "@babel/core": "7.9.0",
     "@material-ui/core": "^4.11.0",
@@ -72,7 +71,9 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "prepublishOnly": "npm run build",
+    "ghpages": "node scripts/gh-pages"
   },
   "eslintConfig": {
     "extends": "react-app"
