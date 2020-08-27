@@ -5,6 +5,7 @@
   "dependencies": {
     "@babel/core": "7.9.0",
     "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
     "@material-ui/styles": "^4.10.0",
     "@serializedowen/regex.js": "^1.2.0",
     "@svgr/webpack": "4.3.3",

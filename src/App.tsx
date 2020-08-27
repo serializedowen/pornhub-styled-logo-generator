@@ -28,6 +28,7 @@ function App() {
   const [generateType, setGenerateType] = React.useState("");
   const [content, setContent] = React.useState("");
   const [splitIndex, setsplitIndex] = React.useState(0);
+  const [exportMethod, setexportMethod] = React.useState(() => () => {});
 
   const classes = useStyles();
   return (
@@ -38,6 +39,7 @@ function App() {
           setGenerateType={setGenerateType}
           content={content}
           splitIndex={splitIndex}
+          exportMethod={exportMethod}
           setsplitIndex={setsplitIndex}
           setContent={setContent}
         ></Form>
@@ -46,12 +48,14 @@ function App() {
         <Suspense fallback="loading">
           {generateType === RendererTypes.TYPE_SVG && (
             <SvgRenderer
+              setexportMethod={setexportMethod}
               content={content}
               splitIndex={splitIndex}
             ></SvgRenderer>
           )}
           {generateType === RendererTypes.TYPE_CANVAS && (
             <CanvasRenderer
+              setexportMethod={setexportMethod}
               content={content}
               splitIndex={splitIndex}
             ></CanvasRenderer>

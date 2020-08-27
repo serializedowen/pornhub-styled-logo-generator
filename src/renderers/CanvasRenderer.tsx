@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useCallback, useRef } from "react";
 import useConfig from "src/hooks/useConfig";
 import drawRoundedRect from "src/utils/drawRoundedRect";
 import download from "src/utils/download";
@@ -10,19 +10,27 @@ let currentAnimation: number;
 export default function CanvasRenderer({
   content,
   splitIndex,
+  setexportMethod,
 }: IRendererProps) {
-  const canvasRef = React.useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const { width, height, leftWidth, rightWidth } = useConfig({
     content,
     splitIndex,
   });
 
-  const exportFunction = React.useCallback(() => {
+  const exportFunction = useCallback(() => {
     if (canvasRef.current) {
       download(dataURItoBlob(canvasRef.current.toDataURL()), "logo.png");
     }
   }, []);
+  useEffect(() => {
+    setexportMethod(() => exportFunction);
+
+    return () => {
+      setexportMethod(() => () => {});
+    };
+  }, [exportFunction, setexportMethod]);
 
   React.useLayoutEffect(() => {
     const update = () => {

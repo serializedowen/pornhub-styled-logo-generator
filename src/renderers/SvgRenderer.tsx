@@ -1,29 +1,77 @@
-import React, { useRef, useCallback } from "react";
+import React, { useRef, useCallback, useState, useEffect } from "react";
 import useConfig from "src/hooks/useConfig";
 import download from "src/utils/download";
-import { Button } from "@material-ui/core";
+import { IconButton, makeStyles, createStyles } from "@material-ui/core";
+import GetAppIcon from "@material-ui/icons/GetApp";
+const useStyles = makeStyles(
+  createStyles({
+    root: {
+      position: "relative",
+    },
 
-export default function SvgRenderer({ content, splitIndex }: IRendererProps) {
+    exportPanel: {
+      visibility: "hidden",
+      transition: "1s",
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      opacity: 0,
+      transform: "translate(-50%, -50%)",
+    },
+
+    renderer: {
+      "&:hover, & $exportPanel": {
+        opacity: 1,
+        visibility: "visible",
+      },
+    },
+  })
+);
+
+export default function SvgRenderer({
+  content,
+  splitIndex,
+  setexportMethod,
+}: IRendererProps) {
   const { width, height, leftWidth, rightWidth } = useConfig({
     content,
     splitIndex,
   });
   const svgRef = useRef<SVGSVGElement>(null);
 
+  const classes = useStyles();
   const exportFunction = useCallback(() => {
     if (svgRef.current) {
-      console.log(svgRef.current.outerHTML);
       download(svgRef.current.outerHTML, "logo.svg");
     }
   }, []);
 
-  return (
-    <div>
-      <Button onClick={exportFunction} color="primary" variant="contained">
-        Export
-      </Button>
+  useEffect(() => {
+    setexportMethod(() => exportFunction);
+    return () => {
+      setexportMethod(() => () => {});
+    };
+  }, [exportFunction, setexportMethod]);
 
-      <svg width={width} height={height} ref={svgRef}>
+  return (
+    <div className={classes.root}>
+      {/* {showButton && (
+      <IconButton
+        onClick={exportFunction}
+        color="primary"
+        component="span"
+        className={classes.exportPanel}
+      >
+        <GetAppIcon></GetAppIcon>
+      </IconButton>
+      )} */}
+
+      <svg
+        width={width}
+        height={height}
+        ref={svgRef}
+        className={classes.renderer}
+      >
         <rect
           width={width}
           height={height}

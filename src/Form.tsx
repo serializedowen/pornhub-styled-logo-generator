@@ -4,9 +4,10 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import NativeFormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-import { TextField, Button, Paper, makeStyles } from "@material-ui/core";
+import { TextField, Paper, makeStyles, IconButton } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
 import RendererTypes from "src/renderers/rendererTypes";
+import GetAppIcon from "@material-ui/icons/GetApp";
 
 type FormProps = {
   content: string;
@@ -15,6 +16,7 @@ type FormProps = {
   setGenerateType: React.Dispatch<React.SetStateAction<string>>;
   splitIndex: number;
   setsplitIndex: React.Dispatch<React.SetStateAction<number>>;
+  exportMethod: () => void;
 };
 
 const useStyles = makeStyles({
@@ -27,6 +29,7 @@ const useStyles = makeStyles({
 const FormControl = styled(NativeFormControl)({
   textAlign: "center",
   display: "flex",
+  flexDirection: "column",
   padding: "1em",
   justifyContent: "center",
 });
@@ -38,6 +41,7 @@ export default function Form({
   setContent,
   splitIndex,
   setsplitIndex,
+  exportMethod,
 }: FormProps) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGenerateType((event.target as HTMLInputElement).value);
@@ -65,26 +69,37 @@ export default function Form({
 
       <FormControl>
         <FormLabel component="legend">类型</FormLabel>
-        <RadioGroup
-          aria-label="gender"
-          name="gender1"
-          value={generateType}
-          onChange={handleChange}
-        >
-          <FormControlLabel
-            value={RendererTypes.TYPE_SVG}
-            control={<Radio />}
-            label="SVG"
-          />
-          <FormControlLabel
-            value={RendererTypes.TYPE_CANVAS}
-            control={<Radio />}
-            label="PNG"
-          />
-        </RadioGroup>
+        <span>
+          <RadioGroup
+            aria-label="gender"
+            name="gender1"
+            value={generateType}
+            onChange={handleChange}
+          >
+            <FormControlLabel
+              value={RendererTypes.TYPE_SVG}
+              control={<Radio />}
+              label="SVG"
+            />
+            <FormControlLabel
+              value={RendererTypes.TYPE_CANVAS}
+              control={<Radio />}
+              label="PNG"
+            />
+          </RadioGroup>
+        </span>
       </FormControl>
       <FormControl>
-        <Button>Generate</Button>
+        <span>
+          <IconButton
+            disabled={content.length === 0 || !generateType}
+            color="secondary"
+            component="span"
+            onClick={exportMethod}
+          >
+            <GetAppIcon></GetAppIcon>
+          </IconButton>
+        </span>
       </FormControl>
     </Paper>
   );

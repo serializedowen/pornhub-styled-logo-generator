@@ -7,7 +7,10 @@ const defaultConfig = {
   leftWidth: 150,
   rightWidth: 150,
 };
-export default ({ content, splitIndex }: IRendererProps) => {
+export default ({
+  content,
+  splitIndex,
+}: Omit<IRendererProps, "setexportMethod">) => {
   const [state, setstate] = useState(defaultConfig);
 
   // const debounced = useDebounce({ content, splitIndex }, 100);
