@@ -14,7 +14,7 @@ export default function CanvasRenderer({
 }: IRendererProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const { width, height, leftWidth, rightWidth } = useConfig({
+  const { width, height, leftWidth, rightWidth, padding } = useConfig({
     content,
     splitIndex,
   });
@@ -36,9 +36,10 @@ export default function CanvasRenderer({
     const update = () => {
       if (canvasRef.current) {
         const ctx = canvasRef.current.getContext("2d")!;
-        canvasRef.current.width = width;
-        canvasRef.current.height = height;
-        ctx.fillRect(0, 0, width, height);
+        canvasRef.current.width = width + 2 * padding;
+        canvasRef.current.height = height + 2 * padding;
+
+        drawRoundedRect(ctx, padding, padding, width, height, 10);
 
         ctx.fillStyle = "rgba(255,255,255)";
         ctx.font = "80px Arial";
@@ -46,22 +47,30 @@ export default function CanvasRenderer({
 
         ctx.textBaseline = "middle";
         ctx.textAlign = "end";
-        ctx.fillText(content.substr(0, splitIndex), width / 2, height / 2);
+        ctx.fillText(
+          content.substr(0, splitIndex),
+          width / 2 + padding,
+          height / 2 + padding
+        );
 
         ctx.fillStyle = "rgb(253,112,11)";
         drawRoundedRect(
           ctx,
-          width / 2,
-          height * 0.2,
+          width / 2 + padding,
+          height * 0.1 + padding,
           rightWidth,
-          height * 0.6,
+          height * 0.8,
           10
         );
 
         ctx.textAlign = "start";
 
         ctx.fillStyle = "rgb(0,0,0)";
-        ctx.fillText(content.substr(splitIndex), width / 2, height / 2);
+        ctx.fillText(
+          content.substr(splitIndex),
+          width / 2 + padding,
+          height / 2 + padding
+        );
         ctx.save();
       }
     };

@@ -33,7 +33,7 @@ export default function SvgRenderer({
   splitIndex,
   setexportMethod,
 }: IRendererProps) {
-  const { width, height, leftWidth, rightWidth } = useConfig({
+  const { width, height, leftWidth, rightWidth, padding } = useConfig({
     content,
     splitIndex,
   });
@@ -67,26 +67,30 @@ export default function SvgRenderer({
       )} */}
 
       <svg
-        width={width}
-        height={height}
+        width={width + padding * 2}
+        height={height + padding * 2}
         ref={svgRef}
         className={classes.renderer}
       >
         <rect
+          x={padding}
+          y={padding}
           width={width}
           height={height}
+          rx="10"
+          ry="10"
           style={{
             fill: "rgb(0,0,0)",
           }}
         />
 
         <rect
-          x={width / 2}
-          y={height * 0.2}
+          x={width / 2 + padding}
+          y={height * 0.1 + padding}
           rx="10"
           ry="10"
           width={rightWidth}
-          height={height * 0.6}
+          height={height * 0.8}
           style={{
             fill: "rgb(253,112,11)",
           }}
@@ -96,8 +100,8 @@ export default function SvgRenderer({
           fontSize="80"
           fontFamily="Arial"
           alignmentBaseline="middle"
-          x={width / 2}
-          y={height / 2}
+          x={width / 2 + padding}
+          y={height / 2 + padding}
           textAnchor="end"
         >
           {content.substring(0, splitIndex)}
@@ -107,8 +111,8 @@ export default function SvgRenderer({
           fontSize="80"
           fontFamily="Arial"
           alignmentBaseline="middle"
-          x={width / 2}
-          y={height / 2}
+          x={width / 2 + padding}
+          y={height / 2 + padding}
         >
           {content.substring(splitIndex)}
         </text>

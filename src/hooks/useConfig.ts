@@ -6,6 +6,7 @@ const defaultConfig = {
   height: 350,
   leftWidth: 150,
   rightWidth: 150,
+  padding: 20,
 };
 export default ({
   content,
@@ -27,7 +28,8 @@ export default ({
         45 *
         2 +
       40;
-    newConfig.height = Math.floor(newConfig.width * 0.6);
+    // newConfig.height = Math.floor(newConfig.width * 0.6);
+    newConfig.height = 150;
 
     newConfig.leftWidth = content.substring(0, splitIndex).gblen * 45;
     newConfig.rightWidth = content.substring(splitIndex).gblen * 45;
