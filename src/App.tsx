@@ -1,10 +1,11 @@
-import React from "react";
-
+import React, { lazy, Suspense } from "react";
 import Form from "./Form";
-import SvgRenderer from "src/renderers/SvgRenderer";
-import CanvasRenderer from "src/renderers/CanvasRenderer";
-import { Box, Container, makeStyles, Paper, Card } from "@material-ui/core";
+import { Box, Container, makeStyles } from "@material-ui/core";
 import { styled } from "@material-ui/styles";
+import RendererTypes from "./renderers/rendererTypes";
+
+const SvgRenderer = lazy(() => import("src/renderers/SvgRenderer"));
+const CanvasRenderer = lazy(() => import("src/renderers/CanvasRenderer"));
 
 const useStyles = makeStyles({
   container: {
@@ -24,7 +25,7 @@ const Centered = styled("div")({
 });
 
 function App() {
-  const [generateType, setGenerateType] = React.useState("svg");
+  const [generateType, setGenerateType] = React.useState("");
   const [content, setContent] = React.useState("");
   const [splitIndex, setsplitIndex] = React.useState(0);
 
@@ -41,15 +42,21 @@ function App() {
           setContent={setContent}
         ></Form>
       </Container>
-
       <Centered>
-        <CanvasRenderer
-          content={content}
-          splitIndex={splitIndex}
-        ></CanvasRenderer>
-      </Centered>
-      <Centered>
-        <SvgRenderer content={content} splitIndex={splitIndex}></SvgRenderer>
+        <Suspense fallback="loading">
+          {generateType === RendererTypes.TYPE_SVG && (
+            <SvgRenderer
+              content={content}
+              splitIndex={splitIndex}
+            ></SvgRenderer>
+          )}
+          {generateType === RendererTypes.TYPE_CANVAS && (
+            <CanvasRenderer
+              content={content}
+              splitIndex={splitIndex}
+            ></CanvasRenderer>
+          )}
+        </Suspense>
       </Centered>
     </Box>
   );

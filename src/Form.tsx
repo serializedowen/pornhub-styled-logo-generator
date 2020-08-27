@@ -6,6 +6,7 @@ import NativeFormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import { TextField, Button, Paper, makeStyles } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
+import RendererTypes from "src/renderers/rendererTypes";
 
 type FormProps = {
   content: string;
@@ -70,8 +71,16 @@ export default function Form({
           value={generateType}
           onChange={handleChange}
         >
-          <FormControlLabel value="svg" control={<Radio />} label="SVG" />
-          <FormControlLabel value="png" control={<Radio />} label="PNG" />
+          <FormControlLabel
+            value={RendererTypes.TYPE_SVG}
+            control={<Radio />}
+            label="SVG"
+          />
+          <FormControlLabel
+            value={RendererTypes.TYPE_CANVAS}
+            control={<Radio />}
+            label="PNG"
+          />
         </RadioGroup>
       </FormControl>
       <FormControl>
