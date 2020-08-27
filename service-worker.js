@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/pornhub-styled-logo-generator/precache-manifest.af13dcd30aee9936b294180a7eb6da3b.js"
+  "/pornhub-styled-logo-generator/precache-manifest.61417af8695ec1e62c4f560b8f5d01fb.js"
 );
 
 self.addEventListener('message', (event) => {

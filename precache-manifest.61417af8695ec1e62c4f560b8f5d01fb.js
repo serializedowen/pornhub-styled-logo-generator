@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f8069bdf867d06eceb51b2d916a1e699",
+    "revision": "41f06502b35414cc86cc6b3d98867db7",
     "url": "/pornhub-styled-logo-generator/index.html"
   },
   {
@@ -16,19 +16,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pornhub-styled-logo-generator/static/js/2.f18c6d82.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5a1f175a050418d8b1ad",
-    "url": "/pornhub-styled-logo-generator/static/js/3.dca37a2e.chunk.js"
+    "revision": "e92cba67789b6f2e10f0",
+    "url": "/pornhub-styled-logo-generator/static/js/3.58185c2b.chunk.js"
   },
   {
-    "revision": "fc36a98eb489522bae86",
-    "url": "/pornhub-styled-logo-generator/static/js/4.04de468d.chunk.js"
+    "revision": "e847ce6555630e30a98c",
+    "url": "/pornhub-styled-logo-generator/static/js/4.16cac1e0.chunk.js"
   },
   {
     "revision": "1f965efa10411ce10900",
     "url": "/pornhub-styled-logo-generator/static/js/main.a8b61ced.chunk.js"
   },
   {
-    "revision": "0d5e54dc4fa686fc6c09",
-    "url": "/pornhub-styled-logo-generator/static/js/runtime-main.3497beed.js"
+    "revision": "3e3c57e70d7b285d49ac",
+    "url": "/pornhub-styled-logo-generator/static/js/runtime-main.0d0d22e6.js"
   }
 ]);
